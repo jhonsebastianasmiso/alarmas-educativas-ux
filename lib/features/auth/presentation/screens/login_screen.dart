@@ -4,6 +4,7 @@ import '../../../../shared/widgets/forms/apple_style_form.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import 'recover_password_screen.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -128,7 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const EdgeInsets.only(bottom: 40.0),
                           child: GestureDetector(
                             onTap: () {
-                              // Navigate to register
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RegisterScreen(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Registrarse',
