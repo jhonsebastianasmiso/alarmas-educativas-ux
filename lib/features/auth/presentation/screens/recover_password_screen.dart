@@ -4,6 +4,7 @@ import '../../../../shared/widgets/forms/apple_style_form.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
 import '../../../../shared/widgets/layouts/apple_header.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
+import 'success_message_screen.dart';
 
 class RecoverPasswordScreen extends StatefulWidget {
   const RecoverPasswordScreen({super.key});
@@ -24,6 +25,21 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
 
   void _recoverPassword() {
     // Implement recovery logic here
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SuccessMessageScreen(
+          title: 'Correo enviado',
+          message:
+              'Se ha enviado un correo a su cuenta asociada con las instrucciones para recuperar su contraseña.\n\nPor favor, revise su bandeja de entrada y la carpeta de spam.',
+          icon: CupertinoIcons.mail,
+          buttonText: 'Volver al inicio',
+          onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
+      ),
+    );
   }
 
   @override

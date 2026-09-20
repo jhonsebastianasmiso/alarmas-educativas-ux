@@ -3,6 +3,8 @@ import '../../../../shared/widgets/layouts/web_layout.dart';
 import '../../../../shared/widgets/layouts/apple_header.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import '../../../../shared/widgets/forms/apple_top_label_field.dart';
+import 'success_message_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -26,6 +28,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _register() {
     // Implement register logic here
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SuccessMessageScreen(
+          title: 'Registro exitoso',
+          message:
+              'Su cuenta ha sido creada exitosamente.\n\nHemos enviado un correo de activación. Por favor, revise su bandeja de entrada y la carpeta de spam para activarla antes de iniciar sesión.',
+          icon: CupertinoIcons.check_mark_circled,
+          buttonText: 'Volver al inicio',
+          onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
+      ),
+    );
   }
 
   @override
