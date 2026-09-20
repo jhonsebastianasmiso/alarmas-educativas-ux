@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'apple_menu_dialog.dart';
 
 class AppleMainHeader extends StatelessWidget {
   final String? title;
   final bool showBackButton;
   final VoidCallback? onBackPressed;
   final Widget? rightActionWidget;
+  final String currentScreen;
 
   const AppleMainHeader({
     super.key,
@@ -12,6 +14,7 @@ class AppleMainHeader extends StatelessWidget {
     this.showBackButton = false,
     this.onBackPressed,
     this.rightActionWidget,
+    this.currentScreen = '',
   });
 
   @override
@@ -24,24 +27,28 @@ class AppleMainHeader extends StatelessWidget {
           // Left: Hamburger Menu + "Menú"
           Align(
             alignment: Alignment.centerLeft,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.menu,
-                  size: 32,
-                  color: Colors.black,
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  'Menú',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+            child: GestureDetector(
+              onTap: () => showAppleMenu(context, currentScreen: currentScreen),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const AnimatedIcon(
+                    icon: AnimatedIcons.menu_close,
+                    progress: AlwaysStoppedAnimation(0.0),
+                    size: 32,
                     color: Colors.black,
                   ),
-                ),
-              ],
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Menú',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 

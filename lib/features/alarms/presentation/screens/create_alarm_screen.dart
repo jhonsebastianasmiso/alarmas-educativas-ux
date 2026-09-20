@@ -369,6 +369,7 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: AppleMainHeader(
+                currentScreen: 'create_alarm',
                 title: 'Crear alarma',
                 showBackButton: true,
               ),

@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
                 vertical: 16.0,
               ),
               child: AppleMainHeader(
+                currentScreen: 'home',
                 rightActionWidget: AppleButton(
                   text: 'Crear Alarma',
                   isFullWidth: false,
