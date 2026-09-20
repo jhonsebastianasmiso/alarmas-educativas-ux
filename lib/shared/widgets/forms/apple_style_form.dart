@@ -44,6 +44,7 @@ class AppleFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool showClearButton;
   final ValueChanged<String>? onChanged;
+  final double labelWidth;
 
   const AppleFormField({
     super.key,
@@ -54,6 +55,7 @@ class AppleFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.showClearButton = false,
     this.onChanged,
+    this.labelWidth = 100.0,
   });
 
   @override
@@ -93,7 +95,7 @@ class _AppleFormFieldState extends State<AppleFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 100, // Fixed width for labels to align properly
+            width: widget.labelWidth, // Dynamic width for labels
             child: Text(
               widget.label,
               style: const TextStyle(

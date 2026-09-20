@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../../shared/widgets/forms/apple_style_form.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
+import 'recover_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -94,7 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
                             onTap: () {
-                              // Navigate to recover password
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const RecoverPasswordScreen(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Recuperar clave',
