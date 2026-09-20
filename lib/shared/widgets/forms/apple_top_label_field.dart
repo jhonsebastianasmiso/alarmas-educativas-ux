@@ -6,6 +6,7 @@ class AppleTopLabelField extends StatelessWidget {
   final String? placeholder;
   final bool obscureText;
   final TextInputType keyboardType;
+  final int maxLines;
 
   const AppleTopLabelField({
     super.key,
@@ -14,6 +15,7 @@ class AppleTopLabelField extends StatelessWidget {
     this.placeholder,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.maxLines = 1,
   });
 
   @override
@@ -41,7 +43,9 @@ class AppleTopLabelField extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             obscureText: obscureText,
-            keyboardType: keyboardType,
+            keyboardType: maxLines > 1 ? TextInputType.multiline : keyboardType,
+            textInputAction: maxLines > 1 ? TextInputAction.newline : null,
+            maxLines: maxLines,
             style: const TextStyle(fontSize: 16, color: Colors.black),
             decoration: InputDecoration(
               hintText: placeholder,
