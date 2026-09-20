@@ -1,4 +1,4 @@
-import 'package:alarmas_educativas/features/home/presentation/screens/home_screen.dart';
+import 'package:alarmas_educativas/features/home/presentation/screens/home_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../shared/widgets/forms/apple_style_form.dart';
@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final Color primaryBlue = const Color(0xFF007AFF); // Apple iOS Blue
+  final Color primaryBlue = const Color(0xFF007AFF);
 
   @override
   void dispose() {
@@ -27,10 +27,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    // Implement login logic here
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const HomeWeb()),
     );
   }
 
@@ -39,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: const Color(
         0xFFF9F9F9,
-      ), // Slight greyish white for background
+      ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -53,7 +52,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         const Spacer(),
-                        // Mockup Logo (Cloud with person)
                         SizedBox(
                           height: 160,
                           width: 200,
@@ -78,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 40),
 
-                        // Apple Style Form
                         AppleFormGroup(
                           children: [
                             AppleFormField(
@@ -96,7 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 12),
 
-                        // Recuperar clave
                         Align(
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
@@ -121,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const SizedBox(height: 30),
 
-                        // Iniciar sesión button
                         AppleButton(
                           text: 'Iniciar sesión',
                           onPressed: _login,
@@ -130,7 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         const Spacer(),
 
-                        // Registrarse
                         Padding(
                           padding: const EdgeInsets.only(bottom: 40.0),
                           child: GestureDetector(

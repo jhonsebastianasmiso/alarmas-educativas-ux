@@ -10,7 +10,7 @@ class AppleFormGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFF2F2F7), // iOS grouped background color
+        color: const Color(0xFFF2F2F7),
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Column(
@@ -95,7 +95,7 @@ class _AppleFormFieldState extends State<AppleFormField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: widget.labelWidth, // Dynamic width for labels
+            width: widget.labelWidth,
             child: Text(
               widget.label,
               style: const TextStyle(

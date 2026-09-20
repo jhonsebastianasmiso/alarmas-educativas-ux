@@ -27,7 +27,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _register() {
-    // Implement register logic here
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -37,7 +37,7 @@ class AppleTopLabelField extends StatelessWidget {
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFF2F2F7), // iOS grouped background color
+            color: const Color(0xFFF2F2F7),
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: TextFormField(

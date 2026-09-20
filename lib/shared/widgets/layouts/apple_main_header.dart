@@ -24,7 +24,6 @@ class AppleMainHeader extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Left: Hamburger Menu + "Menú"
           Align(
             alignment: Alignment.centerLeft,
             child: GestureDetector(
@@ -52,7 +51,6 @@ class AppleMainHeader extends StatelessWidget {
             ),
           ),
 
-          // Center: Title (if any)
           if (title != null)
             Text(
               title!,
@@ -60,11 +58,10 @@ class AppleMainHeader extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF007AFF), // Apple iOS Blue
+                color: Color(0xFF007AFF),
               ),
             ),
 
-          // Right: Action Widget or Back Button
           Align(
             alignment: Alignment.centerRight,
             child: rightActionWidget ??
@@ -79,7 +76,7 @@ class AppleMainHeader extends StatelessWidget {
                         child: const Icon(
                           Icons.arrow_back_ios_new,
                           size: 36,
-                          color: Color(0xFF007AFF), // Apple iOS Blue
+                          color: Color(0xFF007AFF),
                         ),
                       )
                     : const SizedBox.shrink()),

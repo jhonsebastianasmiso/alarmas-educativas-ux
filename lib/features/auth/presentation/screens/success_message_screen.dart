@@ -34,15 +34,13 @@ class SuccessMessageScreen extends StatelessWidget {
               children: [
                 const Spacer(flex: 2),
                 
-                // Success Icon
                 Icon(
                   icon,
                   size: 100,
-                  color: const Color(0xFF007AFF), // Apple iOS Blue
+                  color: const Color(0xFF007AFF),
                 ),
                 const SizedBox(height: 32),
                 
-                // Title
                 Text(
                   title,
                   textAlign: TextAlign.center,
@@ -54,7 +52,6 @@ class SuccessMessageScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 
-                // Message
                 Text(
                   message,
                   textAlign: TextAlign.center,
@@ -67,7 +64,6 @@ class SuccessMessageScreen extends StatelessWidget {
                 
                 const Spacer(flex: 3),
                 
-                // Action Button
                 Align(
                   alignment: Alignment.center,
                   child: AppleButton(
