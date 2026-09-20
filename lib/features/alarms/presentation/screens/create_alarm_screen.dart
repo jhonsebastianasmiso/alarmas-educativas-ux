@@ -122,40 +122,46 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
   }
 
   void _showColorPicker() {
-    showModalBottomSheet(
+    int initialIndex = _colorOptions.indexOf(_selectedColor);
+    if (initialIndex < 0) initialIndex = 0;
+
+    showCupertinoModalPopup(
       context: context,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _colorOptions.length,
-            itemBuilder: (context, index) {
-              final option = _colorOptions[index];
-              return ListTile(
-                leading: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: option.color,
-                    shape: BoxShape.circle,
-                  ),
+      builder: (BuildContext context) {
+        return Container(
+          height: 250,
+          color: Colors.white,
+          child: Column(
+            children: [
+              Expanded(
+                child: CupertinoPicker(
+                  itemExtent: 40,
+                  scrollController: FixedExtentScrollController(initialItem: initialIndex),
+                  onSelectedItemChanged: (int index) {
+                    setState(() {
+                      _selectedColor = _colorOptions[index];
+                    });
+                  },
+                  children: _colorOptions.map((option) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: option.color,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(option.name, style: const TextStyle(fontSize: 20)),
+                      ],
+                    );
+                  }).toList(),
                 ),
-                title: Text(option.name, style: const TextStyle(fontSize: 18)),
-                trailing: _selectedColor == option
-                    ? const Icon(Icons.check, color: Color(0xFF007AFF))
-                    : null,
-                onTap: () {
-                  setState(() {
-                    _selectedColor = option;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            },
+              ),
+            ],
           ),
         );
       },
@@ -163,75 +169,96 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
   }
 
   void _showDaysPicker() {
-    showModalBottomSheet(
+    showCupertinoModalPopup(
       context: context,
-      backgroundColor: Colors.white,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
+      builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
-            return SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(
-                      'Repeticiones',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
+            return Material(
+              type: MaterialType.transparency,
+              child: Container(
+                height: 450,
+                color: const Color(0xFFF2F2F7), // Fondo agrupado de iOS
+                child: Column(
+                  children: [
+                    // Barra superior (Toolbar)
+                    Container(
+                      height: 44,
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CupertinoButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: const Text('Cancelar', style: TextStyle(color: Color(0xFF007AFF))),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                          const Text('Repeticiones', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                          CupertinoButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: const Text('Listo', style: TextStyle(color: Color(0xFF007AFF), fontWeight: FontWeight.w600)),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  const Divider(height: 1),
-                  ..._dayOptions.map((day) {
-                    final isSelected = _selectedDays.contains(day);
-                    return CheckboxListTile(
-                      title: Text(day, style: const TextStyle(fontSize: 18)),
-                      value: isSelected,
-                      activeColor: const Color(0xFF007AFF),
-                      onChanged: (bool? value) {
-                        setModalState(() {
-                          if (value == true) {
-                            _selectedDays.add(day);
-                          } else {
-                            _selectedDays.remove(day);
-                          }
-                        });
-                        setState(() {}); // Update main screen state
-                      },
-                    );
-                  }),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF007AFF),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                    const Divider(height: 1, color: Color(0xFFC6C6C8)),
+                    
+                    // Lista de opciones estilo iOS Inset Grouped
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          const SizedBox(height: 16),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: _dayOptions.asMap().entries.map((entry) {
+                                final index = entry.key;
+                                final day = entry.value;
+                                final isSelected = _selectedDays.contains(day);
+                                return GestureDetector(
+                                  onTap: () {
+                                    setModalState(() {
+                                      if (isSelected) {
+                                        _selectedDays.remove(day);
+                                      } else {
+                                        _selectedDays.add(day);
+                                      }
+                                    });
+                                    setState(() {}); // Reflejar en la pantalla principal
+                                  },
+                                  behavior: HitTestBehavior.opaque,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(day, style: const TextStyle(fontSize: 17, color: Colors.black)),
+                                            if (isSelected)
+                                              const Icon(CupertinoIcons.check_mark, color: Color(0xFF007AFF), size: 20),
+                                          ],
+                                        ),
+                                      ),
+                                      if (index < _dayOptions.length - 1)
+                                        const Divider(height: 1, indent: 16, color: Color(0xFFE5E5EA)),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text(
-                          'Listo',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                          const SizedBox(height: 32),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
