@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../features/home/presentation/screens/home_screen.dart';
+import '../../../features/home/presentation/screens/home_web.dart';
 import '../../../features/alarms/presentation/screens/create_alarm_screen.dart';
 import '../../../features/auth/presentation/screens/login_screen.dart';
 
@@ -14,7 +14,6 @@ void showAppleMenu(BuildContext context, {required String currentScreen}) {
     pageBuilder: (context, animation, secondaryAnimation) {
       return Stack(
         children: [
-          // Efecto Blur del fondo
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -24,7 +23,6 @@ void showAppleMenu(BuildContext context, {required String currentScreen}) {
             ),
           ),
           
-          // Header Flotante y Animado (Superposición pixel-perfect)
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
@@ -63,7 +61,6 @@ void showAppleMenu(BuildContext context, {required String currentScreen}) {
             ),
           ),
 
-          // Contenedor del Menú
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
@@ -98,7 +95,7 @@ void showAppleMenu(BuildContext context, {required String currentScreen}) {
                               Navigator.pop(context);
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                                MaterialPageRoute(builder: (context) => const HomeWeb()),
                               );
                             }
                           },

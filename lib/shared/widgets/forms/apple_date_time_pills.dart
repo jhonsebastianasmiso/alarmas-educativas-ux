@@ -33,15 +33,19 @@ class AppleDateTimePills extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Row(
+        Wrap(
+          spacing: 12,
+          runSpacing: 8,
           children: [
-            // Date Pill
             GestureDetector(
               onTap: onDateTap,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF2F2F7), // iOS grouped background color
+                  color: const Color(0xFFF2F2F7),
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Text(
@@ -50,12 +54,14 @@ class AppleDateTimePills extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 12),
-            // Time Pill
+
             GestureDetector(
               onTap: onTimeTap,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF2F2F7),
                   borderRadius: BorderRadius.circular(15.0),

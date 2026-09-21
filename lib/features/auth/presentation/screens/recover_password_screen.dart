@@ -15,7 +15,7 @@ class RecoverPasswordScreen extends StatefulWidget {
 
 class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
   final _emailController = TextEditingController();
-  final Color primaryBlue = const Color(0xFF007AFF); // Apple iOS Blue
+  final Color primaryBlue = const Color(0xFF007AFF);
 
   @override
   void dispose() {
@@ -24,7 +24,6 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
   }
 
   void _recoverPassword() {
-    // Implement recovery logic here
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -47,7 +46,7 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
     return Scaffold(
       backgroundColor: const Color(
         0xFFF9F9F9,
-      ), // Slight greyish white for background
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -68,14 +67,13 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
                           minHeight: constraints.maxHeight - 48,
-                        ), // minus padding
+                        ),
                         child: IntrinsicHeight(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Spacer(flex: 1),
 
-                              // Title text
                               const Text(
                                 'Ingrese correo o nombre de usuario para recuperar contraseña',
                                 textAlign: TextAlign.center,
@@ -88,7 +86,6 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
 
                               const SizedBox(height: 40),
 
-                              // Input field
                               AppleFormGroup(
                                 children: [
                                   AppleFormField(
@@ -102,7 +99,6 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
 
                               const SizedBox(height: 50),
 
-                              // Enviar button
                               AppleButton(
                                 text: 'Enviar',
                                 onPressed: _recoverPassword,

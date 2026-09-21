@@ -26,7 +26,7 @@ class AppleHeader extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF007AFF), // Apple iOS Blue
+                color: Color(0xFF007AFF),
               ),
             ),
           if (showBackButton)
@@ -42,7 +42,7 @@ class AppleHeader extends StatelessWidget {
                 child: const Icon(
                   Icons.arrow_back_ios_new,
                   size: 40,
-                  color: Color(0xFF007AFF), // Apple iOS Blue
+                  color: Color(0xFF007AFF),
                 ),
               ),
             ),

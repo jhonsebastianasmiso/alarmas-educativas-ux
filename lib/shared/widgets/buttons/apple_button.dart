@@ -22,12 +22,12 @@ class AppleButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF007AFF), // Apple iOS Blue
+          backgroundColor: const Color(0xFF007AFF),
           foregroundColor: Colors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 32),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(height / 2), // Pill shape
+            borderRadius: BorderRadius.circular(height / 2),
           ),
         ),
         child: Text(
