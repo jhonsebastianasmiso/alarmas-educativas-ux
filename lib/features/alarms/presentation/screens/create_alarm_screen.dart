@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../domain/alarm_data.dart';
-import '../../../../shared/widgets/layouts/apple_header.dart';
+import '../../../../shared/widgets/layouts/apple_main_header.dart';
+import '../../../home/presentation/screens/home_screen.dart';
 import '../../../../shared/widgets/forms/apple_top_label_field.dart';
 import '../../../../shared/widgets/forms/apple_date_time_pills.dart';
 import '../../../../shared/widgets/forms/apple_dropdown_field.dart';
@@ -404,36 +405,24 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-              child: AppleHeader(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              child: AppleMainHeader(
+                currentScreen: _isEditing ? 'edit_alarm' : 'create_alarm',
+                title: _isEditing ? 'Editar alarma' : 'Crear alarma',
                 showBackButton: true,
+                onBackPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    );
+                  }
+                },
               ),
             ),
-            if (_isEditing)
-              const Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  'Editar alarma',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF007AFF),
-                  ),
-                ),
-              )
-            else
-              const Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  'Crear alarma',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF007AFF),
-                  ),
-                ),
-              ),
             Expanded(
               child: LayoutBuilder(
                 builder: (context, constraints) {

@@ -27,26 +27,30 @@ class AppleMainHeader extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: () => showAppleMenu(context, currentScreen: currentScreen),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const AnimatedIcon(
-                    icon: AnimatedIcons.menu_close,
-                    progress: AlwaysStoppedAnimation(0.0),
-                    size: 32,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Menú',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedIcon(
+                      icon: AnimatedIcons.menu_close,
+                      progress: AlwaysStoppedAnimation(0.0),
+                      size: 32,
                       color: Colors.black,
                     ),
-                  ),
-                ],
+                    SizedBox(width: 8),
+                    Text(
+                      'Menú',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -67,16 +71,20 @@ class AppleMainHeader extends StatelessWidget {
             child: rightActionWidget ??
                 (showBackButton
                     ? GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: onBackPressed ??
                             () {
                               if (Navigator.canPop(context)) {
                                 Navigator.pop(context);
                               }
                             },
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          size: 36,
-                          color: Color(0xFF007AFF),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.arrow_back_ios_new,
+                            size: 32,
+                            color: Color(0xFF007AFF),
+                          ),
                         ),
                       )
                     : const SizedBox.shrink()),
