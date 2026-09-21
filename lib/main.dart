@@ -1,14 +1,17 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
+import 'features/auth/presentation/screens/mobile_login_screen.dart';
 
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        PointerDeviceKind.trackpad,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.trackpad,
+  };
 }
 
 void main() {
@@ -27,8 +30,39 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        // Optimización para la WEB: desactivar las transiciones de página
+        // predeterminadas que causan lag en el navegador.
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: kIsWeb
+              ? {
+                  for (final platform in TargetPlatform.values)
+                    platform: const NoTransitionsBuilder(),
+                }
+              : const {
+                  TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                  TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                  TargetPlatform.macOS: ZoomPageTransitionsBuilder(),
+                },
+        ),
       ),
-      home: const LoginScreen(),
+      home: kIsWeb ? const LoginScreen() : const MobileLoginScreen(),
     );
+  }
+}
+
+class NoTransitionsBuilder extends PageTransitionsBuilder {
+  const NoTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    // Al retornar directamente el child sin animaciones,
+    // se mejora drásticamente el rendimiento en la web.
+    return child;
   }
 }
