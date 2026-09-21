@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../features/home/presentation/screens/home_web.dart';
+import '../../../features/home/presentation/screens/home_screen.dart';
 import '../../../features/alarms/presentation/screens/create_alarm_screen.dart';
 import '../../../features/auth/presentation/screens/login_screen.dart';
 
@@ -95,7 +95,7 @@ void showAppleMenu(BuildContext context, {required String currentScreen}) {
                               Navigator.pop(context);
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const HomeWeb()),
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
                               );
                             }
                           },

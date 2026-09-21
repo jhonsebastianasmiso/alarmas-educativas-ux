@@ -1,4 +1,4 @@
-import 'package:alarmas_educativas/features/home/presentation/screens/home_web.dart';
+import 'package:alarmas_educativas/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../shared/widgets/forms/apple_style_form.dart';
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _login() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeWeb()),
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
   }
 
