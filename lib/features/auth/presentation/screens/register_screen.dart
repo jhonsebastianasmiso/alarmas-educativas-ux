@@ -16,12 +16,14 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _institutionController = TextEditingController();
 
   @override
   void dispose() {
     _usernameController.dispose();
     _emailController.dispose();
+    _passwordController.dispose();
     _institutionController.dispose();
     super.dispose();
   }
@@ -89,6 +91,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       controller: _emailController,
                                       label: 'Correo electrónico',
                                       keyboardType: TextInputType.emailAddress,
+                                    ),
+                                    const SizedBox(height: 24),
+                                    AppleTopLabelField(
+                                      controller: _passwordController,
+                                      label: 'Contraseña',
+                                      obscureText: true,
                                     ),
                                     const SizedBox(height: 24),
                                     AppleTopLabelField(
