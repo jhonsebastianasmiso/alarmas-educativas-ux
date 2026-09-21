@@ -19,40 +19,56 @@ La versión web del prototipo ya se encuentra desplegada y lista para pruebas de
 
 ## 📱 Pruebas en Móvil (y ejecución local)
 
-Para probar la experiencia nativa en dispositivos móviles o correr el proyecto localmente, es necesario compilar la aplicación utilizando el SDK de Flutter.
+Para probar la experiencia nativa en dispositivos móviles o correr el proyecto localmente en tu máquina para validar el código y las interfaces, sigue estos pasos al pie de la letra.
 
 ### Requisitos Previos
 
-1. Instalar [Flutter SDK](https://docs.flutter.dev/get-started/install).
-2. Tener configurado un editor de código como VS Code o Android Studio.
-3. Tener un simulador de iOS, emulador de Android, o un dispositivo físico conectado.
+Para ejecutar la aplicación nativamente en tu entorno local, asegúrate de cumplir con los siguientes requerimientos:
+1. Tener instalado el **Flutter SDK** (versión estable más reciente recomendada). [Guía de Instalación Oficial](https://docs.flutter.dev/get-started/install).
+2. Contar con un editor de código compatible (ej. **VS Code** con la extensión de Flutter, o **Android Studio**).
+3. (Para pruebas móviles) Tener configurado y abierto un **emulador de Android**, un **simulador de iOS**, o un **dispositivo físico** conectado por USB/Wi-Fi en modo desarrollador.
 
-### Instrucciones de Instalación
+### Paso a Paso para la Instalación y Ejecución
 
-1. Clona el repositorio en tu máquina local.
-2. Abre la terminal en la raíz del proyecto.
-3. Instala las dependencias del proyecto ejecutando:
+1. **Clonar el Repositorio:**
+   Abre tu terminal de preferencia y ejecuta:
+   ```bash
+   git clone https://github.com/jhonsebastianasmiso/alarmas-educativas-ux.git
+   ```
+
+2. **Ingresar al directorio:**
+   ```bash
+   cd alarmas-educativas-ux
+   ```
+
+3. **Verificar el entorno de Flutter:**
+   Es buena práctica asegurarse de que Flutter reconoce el dispositivo/emulador que tienes abierto:
+   ```bash
+   flutter doctor
+   flutter devices
+   ```
+
+4. **Instalar Dependencias:**
+   Descarga todos los paquetes necesarios declarados en el `pubspec.yaml`:
    ```bash
    flutter pub get
    ```
 
-### Ejecución
-
-Para iniciar la aplicación, asegúrate de tener un dispositivo/emulador seleccionado y ejecuta:
-
-```bash
-flutter run
-```
+5. **Lanzar la Aplicación:**
+   Finalmente, corre la aplicación. Si tienes múltiples dispositivos conectados, Flutter te pedirá seleccionar uno.
+   ```bash
+   flutter run
+   ```
 
 > **Arquitectura Multipantalla:**
-> El proyecto detecta automáticamente la plataforma en la que se está ejecutando. Si se compila y ejecuta en Android o iOS, mostrará directamente el flujo nativo móvil. Si se ejecuta en Chrome o Web, redirigirá al layout de escritorio.
+> El proyecto detecta automáticamente la plataforma en la que se está ejecutando. Si se compila y ejecuta en un simulador/celular Android o iOS, mostrará directamente el **flujo nativo móvil**. Si decides ejecutarlo en Chrome (`flutter run -d chrome`), redirigirá automáticamente al **layout de escritorio (web)**.
 > 
 > **Descarga Rápida (Android):**
 > De momento, puedes instalar el APK de prueba en Android desde el siguiente enlace:
 > [Descargar APK (Próximamente)](#)
 
-> **Nota para las pruebas Móviles (Locales):**
-> Durante las sesiones de validación con usuarios, la aplicación debe estar corriendo en un celular (físico o simulado) para que la interacción con los menús inferiores, los diálogos de estilo iOS y los gestos de deslizamiento se experimenten de manera realista.
+> **Nota Crítica sobre las Pruebas Móviles:**
+> Para validar correctamente la experiencia de usuario móvil, es **estrictamente necesario** que la aplicación se corra en un celular (físico o simulado) con resoluciones móviles convencionales. Esto permitirá que la interacción con los menús inferiores tipo Apple, los modales con difuminado y los gestos de deslizamiento (*swipe*) en las tarjetas se rendericen y se experimenten de manera realista y *pixel-perfect*.
 
 ---
 
