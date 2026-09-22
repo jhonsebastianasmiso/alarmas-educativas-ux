@@ -2,6 +2,7 @@ import '../../../sync/presentation/screens/mobile_connect_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../shared/widgets/layouts/apple_logout_dialog.dart';
+import '../../../../shared/widgets/layouts/apple_push_notification.dart';
 
 class MobileHomeScreen extends StatefulWidget {
   const MobileHomeScreen({super.key});
@@ -208,7 +209,15 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                         'Sincronizar',
                         false,
                         primaryBlue,
-                        _openConnect,
+                        () {
+                          final currentTitle = _currentPage == 0 ? 'MISW-4302 UX' : 'MISW-4101 Prácticas';
+                          final currentTask = _currentPage == 0 ? _tasks1[0]['title'] : _tasks2[0]['title'];
+                          showApplePushNotification(
+                            context,
+                            title: currentTitle,
+                            body: currentTask.toString(),
+                          );
+                        },
                       ),
                     ),
                   ],
