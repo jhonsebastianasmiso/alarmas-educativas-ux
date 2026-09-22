@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import '../../../features/home/presentation/screens/study_session_screen.dart';
 
 void showApplePushNotification(BuildContext context, {required String title, required String body}) {
   final overlay = Overlay.of(context);
@@ -362,7 +363,18 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
                           icon: CupertinoIcons.viewfinder,
                           text: 'Estudiar',
                           onTap: () {
-                            _controller.reverse().then((_) => widget.onDismiss());
+                            _controller.reverse().then((_) {
+                              widget.onDismiss();
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => StudySessionScreen(
+                                    title: widget.title,
+                                    taskName: widget.body,
+                                    accentColor: const Color(0xFF00C7E6),
+                                  ),
+                                ),
+                              );
+                            });
                           },
                         ),
                       ],
