@@ -75,3 +75,4 @@ Para ejecutar la aplicación nativamente en tu entorno local, asegúrate de cump
 ## 🎨 Aspectos Destacados del Diseño
 - **Estilo Apple (iOS):** El diseño busca un acabado *pixel-perfect* basado en los lineamientos de Apple, empleando difuminados, botones tipo pastilla y esquinas redondeadas.
 - **Responsividad:** El layout se adapta automáticamente para no perder legibilidad en pantallas anchas, manteniendo el contenido centrado y accesible.
+- **Validación de Push Notifications:** Para probar el flujo interactivo de la notificación push estilo iOS, simplemente da clic en el botón inferior de **Actualizar / Sincronizar**. Podrás expandir la notificación, seleccionar '5 minutos más' o 'Estudiar', y experimentar el flujo completo hasta finalizar la tarea.
