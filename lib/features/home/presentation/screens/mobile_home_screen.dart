@@ -1,3 +1,4 @@
+import '../../../sync/presentation/screens/mobile_connect_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../shared/widgets/layouts/apple_logout_dialog.dart';
@@ -31,6 +32,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _openConnect() {
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute(builder: (_) => const MobileConnectScreen()),
+    );
   }
 
   void _goToPage(int page) {
@@ -67,7 +75,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   SizedBox(
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _openConnect,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryBlue,
                         foregroundColor: Colors.white,
@@ -89,7 +97,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 ],
               ),
             ),
-            
+
             // Swipeable Content
             Expanded(
               child: PageView(
@@ -102,7 +110,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 children: [
                   _buildPageContent(
                     title: 'MISW-4302 UX',
-                    subtitle: 'Entrega de validación de\nrequisitos funcionales',
+                    subtitle:
+                        'Entrega de validación de\nrequisitos funcionales',
                     accentColor: const Color(0xFFD92EEB),
                     tasks: _tasks1,
                   ),
@@ -115,7 +124,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 ],
               ),
             ),
-            
+
             // Fixed Dots indicator
             Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
@@ -128,7 +137,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: _currentPage == 0 ? primaryBlue : Colors.grey.shade400,
+                        color: _currentPage == 0
+                            ? primaryBlue
+                            : Colors.grey.shade400,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -140,7 +151,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: _currentPage == 1 ? primaryBlue : Colors.grey.shade400,
+                        color: _currentPage == 1
+                            ? primaryBlue
+                            : Colors.grey.shade400,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -148,12 +161,19 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                 ],
               ),
             ),
-            
+
             // Bottom Navigation Pill
             Padding(
-              padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+              padding: const EdgeInsets.only(
+                left: 30.0,
+                right: 30.0,
+                bottom: 30.0,
+              ),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 6.0,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF2F2F7), // Más apple-like
                   borderRadius: BorderRadius.circular(50.0),
@@ -163,15 +183,33 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: _buildNavItem(CupertinoIcons.square_arrow_right, 'Salir', false, primaryBlue, () {
-                        showAppleLogoutDialog(context);
-                      }),
+                      child: _buildNavItem(
+                        CupertinoIcons.square_arrow_right,
+                        'Salir',
+                        false,
+                        primaryBlue,
+                        () {
+                          showAppleLogoutDialog(context);
+                        },
+                      ),
                     ),
                     Expanded(
-                      child: _buildNavItem(CupertinoIcons.house_fill, 'Inicio', true, primaryBlue, () {}),
+                      child: _buildNavItem(
+                        CupertinoIcons.house_fill,
+                        'Inicio',
+                        true,
+                        primaryBlue,
+                        () {},
+                      ),
                     ),
                     Expanded(
-                      child: _buildNavItem(CupertinoIcons.arrow_2_circlepath, 'Sincronizar', false, primaryBlue, () {}),
+                      child: _buildNavItem(
+                        CupertinoIcons.arrow_2_circlepath,
+                        'Sincronizar',
+                        false,
+                        primaryBlue,
+                        _openConnect,
+                      ),
                     ),
                   ],
                 ),
@@ -236,17 +274,11 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
             children: [
               Text(
                 'En una semana',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
               Text(
                 'Agosto 23',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
             ],
           ),
@@ -283,7 +315,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
     );
   }
 
-  Widget _buildTaskItem(String title, String date, bool isCompleted, Color accentColor, VoidCallback onTap) {
+  Widget _buildTaskItem(
+    String title,
+    String date,
+    bool isCompleted,
+    Color accentColor,
+    VoidCallback onTap,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: GestureDetector(
@@ -292,7 +330,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
         child: Row(
           children: [
             Icon(
-              isCompleted ? CupertinoIcons.check_mark_circled_solid : CupertinoIcons.circle,
+              isCompleted
+                  ? CupertinoIcons.check_mark_circled_solid
+                  : CupertinoIcons.circle,
               color: isCompleted ? accentColor : Colors.grey.shade400,
               size: 28,
             ),
@@ -300,18 +340,12 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
               ),
             ),
             Text(
               date,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-              ),
+              style: const TextStyle(fontSize: 20, color: Colors.black),
             ),
           ],
         ),
@@ -319,7 +353,13 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isSelected, Color primaryBlue, VoidCallback onTap) {
+  Widget _buildNavItem(
+    IconData icon,
+    String label,
+    bool isSelected,
+    Color primaryBlue,
+    VoidCallback onTap,
+  ) {
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -333,11 +373,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                color: primaryBlue,
-                size: 26,
-              ),
+              Icon(icon, color: primaryBlue, size: 26),
               const SizedBox(height: 2),
               Text(
                 label,
