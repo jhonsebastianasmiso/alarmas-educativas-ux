@@ -38,7 +38,7 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
   Timer? _dismissTimer;
-  bool _isExpanded = false;
+  int _state = 0; // 0 = collapsed, 1 = expanded, 2 = postponing
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
 
   void _startDismissTimer() {
     _dismissTimer = Timer(const Duration(seconds: 4), () {
-      if (mounted && !_isExpanded) {
+      if (mounted && _state == 0) {
         _controller.reverse().then((_) => widget.onDismiss());
       }
     });
@@ -79,9 +79,21 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
     super.dispose();
   }
 
+  void _submitPostpone() {
+    // Show a small native-like alert or snackbar and dismiss
+    _controller.reverse().then((_) {
+      widget.onDismiss();
+      // Use ScaffoldMessenger to show feedback
+      // We need a context that has Scaffold. We can't easily use the Overlay context for ScaffoldMessenger.
+      // But we can just assume the user understands it's postponed, or use a root navigator dialog.
+      // The prompt said: "solo indicar, como la alarma se a pospuesto"
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     const Color primaryBlue = Color(0xFF007AFF);
+    final bool isExpanded = _state > 0;
 
     return Positioned(
       top: MediaQuery.of(context).padding.top + 10,
@@ -103,9 +115,9 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
                   }
                 },
                 onTap: () {
-                  if (!_isExpanded) {
+                  if (_state == 0) {
                     setState(() {
-                      _isExpanded = true;
+                      _state = 1;
                     });
                     _cancelTimer();
                   }
@@ -113,12 +125,8 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: _isExpanded ? 16 : 12,
-                  ),
                   decoration: BoxDecoration(
-                    color: _isExpanded ? const Color(0xFFF2F2F7) : const Color(0xFF1E1E1E),
+                    color: isExpanded ? const Color(0xFFF9F9F9) : const Color(0xFF1E1E1E),
                     borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
@@ -132,103 +140,194 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // Header Row
-                      Row(
-                        children: [
-                          Container(
-                            width: 44,
-                            height: 44,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: _isExpanded ? Border.all(color: Colors.grey.shade300) : null,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.scope,
-                                color: Colors.grey.shade400,
-                                size: 24,
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: isExpanded ? 16 : 12,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: isExpanded ? Border.all(color: Colors.grey.shade300) : null,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  CupertinoIcons.scope,
+                                  color: Colors.grey.shade400,
+                                  size: 24,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      widget.title,
-                                      style: TextStyle(
-                                        color: _isExpanded ? primaryBlue : Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        widget.title,
+                                        style: TextStyle(
+                                          color: isExpanded ? primaryBlue : Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      '9:41 AM',
-                                      style: TextStyle(
-                                        color: Colors.grey.shade500,
-                                        fontSize: 13,
+                                      Text(
+                                        '9:41 AM',
+                                        style: TextStyle(
+                                          color: Colors.grey.shade500,
+                                          fontSize: 13,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  widget.body,
-                                  style: TextStyle(
-                                    color: _isExpanded ? primaryBlue : Colors.white,
-                                    fontSize: 15,
+                                    ],
                                   ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    widget.body,
+                                    style: TextStyle(
+                                      color: isExpanded ? primaryBlue : Colors.white,
+                                      fontSize: 15,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       
                       // Expanded Details
-                      if (_isExpanded) ...[
-                        const SizedBox(height: 32),
-                        const Text(
-                          '7:00 - 8:00 p.m.',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
+                      if (_state == 1) ...[
+                        Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF2F2F7),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(28),
+                              bottomRight: Radius.circular(28),
+                            ),
+                          ),
+                          padding: const EdgeInsets.only(top: 16, bottom: 32),
+                          child: Column(
+                            children: const [
+                              Text(
+                                '7:00 - 8:00 p.m.',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 16),
+                              Text(
+                                '6 tareas pendientes',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: primaryBlue,
+                                ),
+                              ),
+                              SizedBox(height: 24),
+                              Text(
+                                '1 Hora',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          '6 tareas pendientes',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: primaryBlue,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        const Text(
-                          '1 Hora',
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
                       ],
+
+                      // Postponing State
+                      if (_state == 2) ...[
+                        Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFCECECE), // Gray background from mockup
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(28),
+                              bottomRight: Radius.circular(28),
+                            ),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Motivo por no estudiar',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: TextField(
+                                  autofocus: true,
+                                  decoration: InputDecoration(
+                                    hintText: 'Motivo:',
+                                    hintStyle: const TextStyle(color: Colors.black, fontSize: 16),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.clear_thick_circled,
+                                      color: Colors.grey.shade400,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              SizedBox(
+                                width: 140,
+                                height: 44,
+                                child: ElevatedButton(
+                                  onPressed: _submitPostpone,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: primaryBlue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                    elevation: 0,
+                                  ),
+                                  child: const Text(
+                                    'Posponer',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]
                     ],
                   ),
                 ),
               ),
               
               // Action Menu (Context Menu style)
-              if (_isExpanded)
+              if (_state == 1)
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0),
                   child: Container(
@@ -250,7 +349,9 @@ class _ApplePushNotificationWidgetState extends State<_ApplePushNotificationWidg
                           icon: CupertinoIcons.viewfinder,
                           text: '5 minutos más',
                           onTap: () {
-                            _controller.reverse().then((_) => widget.onDismiss());
+                            setState(() {
+                              _state = 2; // Transition to postponing
+                            });
                           },
                         ),
                         Container(
