@@ -59,8 +59,9 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(submit);
       await tester.pumpAndSettle();
-      expect(find.text('Sincronización no disponible'), findsOneWidget);
-      await tester.tap(find.text('Entendido'));
+      expect(find.text('Cursos de ejemplo'), findsOneWidget);
+      expect(find.byType(Checkbox), findsNWidgets(4));
+      await tester.tap(find.byTooltip('Volver'));
       await tester.pumpAndSettle();
       expect(find.text('Campus'), findsOneWidget);
     },

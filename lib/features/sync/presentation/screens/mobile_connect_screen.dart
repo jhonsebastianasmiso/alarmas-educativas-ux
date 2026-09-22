@@ -1,3 +1,4 @@
+import 'found_information_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import '../../../../shared/widgets/forms/apple_style_form.dart';
@@ -38,20 +39,9 @@ class _MobileConnectScreenState extends State<MobileConnectScreen> {
     }
     setState(() => _error = error);
     if (error != null) return;
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Sincronización no disponible'),
-        content: const Text(
-          'La conexión con plataformas aún no está habilitada. No se han enviado tus datos ni sincronizado actividades.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Entendido'),
-          ),
-        ],
-      ),
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute(builder: (_) => const FoundInformationScreen()),
     );
   }
 
