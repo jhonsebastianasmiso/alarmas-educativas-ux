@@ -64,8 +64,8 @@ Para ejecutar la aplicación nativamente en tu entorno local, asegúrate de cump
 > El proyecto detecta automáticamente la plataforma en la que se está ejecutando. Si se compila y ejecuta en un simulador/celular Android o iOS, mostrará directamente el **flujo nativo móvil**. Si decides ejecutarlo en Chrome (`flutter run -d chrome`), redirigirá automáticamente al **layout de escritorio (web)**.
 > 
 > **Descarga Rápida (Android):**
-> Puedes descargar e instalar el APK de prueba en Android desde el siguiente enlace de Google Drive (recuerda reemplazar `{LINK_DE_TU_GOOGLE_DRIVE}` con el enlace real):
-> [Descargar APK para Android]({LINK_DE_TU_GOOGLE_DRIVE})
+> Puedes descargar e instalar el APK de prueba en Android directamente desde este repositorio:
+> [Descargar APK para Android (Release)](./apk/app-release.apk)
 
 > **Nota Crítica sobre las Pruebas Móviles:**
 > Para validar correctamente la experiencia de usuario móvil, es **estrictamente necesario** que la aplicación se corra en un celular (físico o simulado) con resoluciones móviles convencionales. Esto permitirá que la interacción con los menús inferiores tipo Apple, los modales con difuminado y los gestos de deslizamiento (*swipe*) en las tarjetas se rendericen y se experimenten de manera realista y *pixel-perfect*.
