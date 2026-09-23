@@ -1,3 +1,4 @@
+import '../../../../shared/styles/mobile_text_styles.dart';
 import '../../../sync/presentation/screens/mobile_connect_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -64,14 +65,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Alarma P.',
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.w800,
-                      color: primaryBlue,
-                    ),
-                  ),
+                  const Text('Alarma P.', style: MobileTextStyles.title),
                   SizedBox(
                     height: 40,
                     child: ElevatedButton(

@@ -52,77 +52,99 @@ class _FoundInformationScreenState extends State<FoundInformationScreen> {
     backgroundColor: Colors.white,
     body: SafeArea(
       child: WebLayout(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const MobileFlowHeader(title: 'Información\nencontrada'),
-              const SizedBox(height: 96),
-              const Text(
-                'Selecciona la información a\nsincronizar',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, height: 1.2),
-              ),
-              const SizedBox(height: 32),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Text(
-                  'Cursos:',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-              ),
-              const SizedBox(height: 12),
-              for (var index = 0; index < _courses.length; index++)
-                CheckboxListTile(
-                  title: Tooltip(
-                    message: _courses[index],
-                    child: Text(
-                      _courses[index],
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 17, color: Colors.black),
+        child: LayoutBuilder(
+          builder: (context, constraints) => SizedBox(
+            height: constraints.maxHeight,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(32, 12, 32, 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 104),
+                    child: const MobileFlowHeader(
+                      title: 'Información\nencontrada',
                     ),
                   ),
-                  activeColor: const Color(0xFF007AFF),
-                  checkboxShape: const CircleBorder(),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  dense: true,
-                  value: _selected.contains(index),
-                  onChanged: (checked) => setState(() {
-                    if (checked == true) {
-                      _selected.add(index);
-                    } else {
-                      _selected.remove(index);
-                    }
-                    _error = null;
-                  }),
-                  controlAffinity: ListTileControlAffinity.leading,
-                ),
-              if (_error != null)
-                Semantics(
-                  liveRegion: true,
-                  child: Text(
-                    _error!,
-                    style: const TextStyle(color: Color(0xFFB3261E)),
+                  SizedBox(
+                    height:
+                        ((constraints.maxHeight * .15).clamp(32.0, 110.0) - 56)
+                            .clamp(0.0, 54.0),
                   ),
-                ),
-              const SizedBox(height: 56),
-              Center(
-                child: AppleButton(
-                  text: 'Crear Alarmas',
-                  height: 44,
-                  isFullWidth: false,
-                  onPressed: _createAlarms,
-                ),
+                  const Text(
+                    'Selecciona la información a\nsincronizar',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, height: 1.2),
+                  ),
+                  const SizedBox(height: 32),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      'Cursos:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  for (var index = 0; index < _courses.length; index++)
+                    CheckboxListTile(
+                      title: Tooltip(
+                        message: _courses[index],
+                        child: Text(
+                          _courses[index],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      activeColor: const Color(0xFF007AFF),
+                      checkboxShape: const CircleBorder(),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      dense: true,
+                      value: _selected.contains(index),
+                      onChanged: (checked) => setState(() {
+                        if (checked == true) {
+                          _selected.add(index);
+                        } else {
+                          _selected.remove(index);
+                        }
+                        _error = null;
+                      }),
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                  if (_error != null)
+                    Semantics(
+                      liveRegion: true,
+                      child: Text(
+                        _error!,
+                        style: const TextStyle(color: Color(0xFFB3261E)),
+                      ),
+                    ),
+                  const SizedBox(height: 56),
+                  Center(
+                    child: AppleButton(
+                      text: 'Crear Alarmas',
+                      height: 44,
+                      isFullWidth: false,
+                      onPressed: _createAlarms,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Cursos de ejemplo',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12, color: Colors.black54),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              const Text(
-                'Cursos de ejemplo',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 12, color: Colors.black54),
-              ),
-            ],
+            ),
           ),
         ),
       ),
