@@ -79,7 +79,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   vertical: 32.0,
                                 ),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     const SizedBox(height: 20),
                                     AppleTopLabelField(
@@ -107,11 +108,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                             ),
-                            
+
                             const Spacer(flex: 1),
-                            
+
                             Padding(
-                              padding: const EdgeInsets.only(right: 36.0, bottom: 32.0),
+                              padding: const EdgeInsets.only(
+                                right: 36.0,
+                                bottom: 32.0,
+                              ),
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: AppleButton(

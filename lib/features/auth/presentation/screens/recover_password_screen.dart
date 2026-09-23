@@ -44,9 +44,7 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFF9F9F9,
-      ),
+      backgroundColor: const Color(0xFFF9F9F9),
       body: SafeArea(
         child: Column(
           children: [
