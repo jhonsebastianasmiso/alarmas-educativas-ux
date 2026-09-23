@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-/// Use Android font metrics for geometry assertions instead of test-only Ahem.
 Future<void> loadAndroidFont() async {
   final artifacts = File(Platform.resolvedExecutable).parent.parent.parent;
   final font = File('${artifacts.path}/material_fonts/roboto-regular.ttf');

@@ -30,8 +30,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
-        // Optimización para la WEB: desactivar las transiciones de página
-        // predeterminadas que causan lag en el navegador.
         pageTransitionsTheme: PageTransitionsTheme(
           builders: kIsWeb
               ? {
@@ -61,8 +59,6 @@ class NoTransitionsBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    // Al retornar directamente el child sin animaciones,
-    // se mejora drásticamente el rendimiento en la web.
     return child;
   }
 }

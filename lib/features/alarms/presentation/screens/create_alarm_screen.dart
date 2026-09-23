@@ -217,10 +217,9 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
               type: MaterialType.transparency,
               child: Container(
                 height: 450,
-                color: const Color(0xFFF2F2F7), // Fondo agrupado de iOS
+                color: const Color(0xFFF2F2F7),
                 child: Column(
                   children: [
-                    // Barra superior (Toolbar)
                     Container(
                       height: 44,
                       color: Colors.white,
@@ -243,7 +242,6 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                     ),
                     const Divider(height: 1, color: Color(0xFFC6C6C8)),
                     
-                    // Lista de opciones estilo iOS Inset Grouped
                     Expanded(
                       child: ListView(
                         children: [
@@ -268,7 +266,7 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                                         _selectedDays.add(day);
                                       }
                                     });
-                                    setState(() {}); // Reflejar en la pantalla principal
+                                    setState(() {});
                                   },
                                   behavior: HitTestBehavior.opaque,
                                   child: Column(

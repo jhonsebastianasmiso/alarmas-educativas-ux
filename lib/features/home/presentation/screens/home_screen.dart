@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../alarms/domain/alarm_data.dart';
 import '../../../alarms/presentation/screens/create_alarm_screen.dart';
-// Note: We use the standalone CreateAlarmScreen now
 import '../../../../shared/widgets/layouts/apple_main_header.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 
@@ -45,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   Future<void> _openAlarm({int? index}) async {
-    // Navigate to CreateAlarmScreen and await result
     final result = await Navigator.push<AlarmData>(
       context,
       MaterialPageRoute(
@@ -71,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header a ancho completo con padding
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 24.0,
@@ -86,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Contenido centrado y con un ancho máximo de 800px para web
             Expanded(
               child: Center(
                 child: ConstrainedBox(
@@ -152,9 +148,9 @@ class _AlarmCard extends StatelessWidget {
       color: Colors.black,
     );
     const detailStyle = TextStyle(
-      fontSize: 16, // Corregido el tamaño chiquito (era 12)
+      fontSize: 16,
       fontWeight: FontWeight.w500,
-      color: Colors.black54, // Color más tenue al estilo Apple
+      color: Colors.black54,
     );
 
     final header = Semantics(
@@ -197,7 +193,7 @@ class _AlarmCard extends StatelessWidget {
                           expanded
                               ? Icons.keyboard_arrow_up
                               : Icons.keyboard_arrow_down,
-                          size: 28, // Tamaño aumentado para ser proporcional
+                          size: 28,
                         ),
                       ],
                     ),
@@ -217,7 +213,7 @@ class _AlarmCard extends StatelessWidget {
                     expanded
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
-                    size: 28, // Tamaño aumentado para ser proporcional
+                    size: 28,
                   ),
                 ],
               );

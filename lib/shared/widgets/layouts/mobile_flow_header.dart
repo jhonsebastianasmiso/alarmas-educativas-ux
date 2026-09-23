@@ -1,7 +1,6 @@
 import '../../styles/mobile_text_styles.dart';
 import 'package:flutter/material.dart';
 
-/// Mobile flow header that also accommodates multiline titles and large text.
 class MobileFlowHeader extends StatelessWidget {
   const MobileFlowHeader({super.key, required this.title});
   final String title;

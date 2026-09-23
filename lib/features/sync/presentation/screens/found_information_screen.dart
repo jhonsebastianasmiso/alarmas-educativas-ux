@@ -26,7 +26,6 @@ class _FoundInformationScreenState extends State<FoundInformationScreen> {
       setState(() => _error = 'Selecciona al menos un curso.');
       return;
     }
-    // Simulated per-course totals; the initial three selections match the mockup.
     const alarmCounts = [17, 18, 15, 12];
     const activityCounts = [10, 10, 10, 8];
     Navigator.push<void>(

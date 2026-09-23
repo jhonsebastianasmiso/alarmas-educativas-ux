@@ -59,7 +59,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Fixed Header
             Padding(
               padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 16.0),
               child: Row(
@@ -92,7 +91,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               ),
             ),
 
-            // Swipeable Content
             Expanded(
               child: PageView(
                 controller: _pageController,
@@ -119,7 +117,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               ),
             ),
 
-            // Fixed Dots indicator
             Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
               child: Row(
@@ -156,7 +153,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               ),
             ),
 
-            // Bottom Navigation Pill
             Padding(
               padding: const EdgeInsets.only(
                 left: 30.0,
@@ -169,7 +165,7 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
                   vertical: 6.0,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF2F2F7), // Más apple-like
+                  color: const Color(0xFFF2F2F7),
                   borderRadius: BorderRadius.circular(50.0),
                   border: Border.all(color: Colors.grey.shade300, width: 0.5),
                 ),
@@ -229,7 +225,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 16),
-          // Main Card
           Container(
             padding: const EdgeInsets.all(24.0),
             decoration: BoxDecoration(
@@ -262,7 +257,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
           const SizedBox(height: 32),
 
-          // Date Info
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -278,7 +272,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
           const SizedBox(height: 32),
 
-          // Entregas pendientes
           const Text(
             'Entregas pendientes:',
             style: TextStyle(
@@ -289,7 +282,6 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
           const SizedBox(height: 20),
 
-          // Lista de tareas
           ...List.generate(tasks.length, (index) {
             final task = tasks[index];
             return _buildTaskItem(
