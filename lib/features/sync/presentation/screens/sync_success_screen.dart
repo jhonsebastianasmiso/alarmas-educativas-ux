@@ -3,7 +3,6 @@ import '../../../home/presentation/screens/mobile_home_screen.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
 
-/// Confirmation for the prototype's simulated synchronization results.
 class SyncSuccessScreen extends StatelessWidget {
   const SyncSuccessScreen({
     super.key,
