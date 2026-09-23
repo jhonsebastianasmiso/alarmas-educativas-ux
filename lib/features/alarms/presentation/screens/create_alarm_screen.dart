@@ -29,16 +29,27 @@ const List<String> _dayOptions = [
   'Jueves',
   'Viernes',
   'Sábado',
-  'Domingo'
+  'Domingo',
 ];
 
 const List<String> _months = [
-  'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  'Ene',
+  'Feb',
+  'Mar',
+  'Abr',
+  'May',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dic',
 ];
 
 class CreateAlarmScreen extends StatefulWidget {
   final AlarmData? initialAlarm;
-  
+
   const CreateAlarmScreen({super.key, this.initialAlarm});
 
   @override
@@ -81,12 +92,6 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
   }
 
   void _createAlarm() {
-    if (_nameController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Escribe un nombre para la alarma.')),
-      );
-      return;
-    }
     Navigator.pop(
       context,
       AlarmData(
@@ -175,7 +180,9 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
               Expanded(
                 child: CupertinoPicker(
                   itemExtent: 40,
-                  scrollController: FixedExtentScrollController(initialItem: initialIndex),
+                  scrollController: FixedExtentScrollController(
+                    initialItem: initialIndex,
+                  ),
                   onSelectedItemChanged: (int index) {
                     setState(() {
                       _selectedColor = _colorOptions[index];
@@ -228,20 +235,35 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                         children: [
                           CupertinoButton(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: const Text('Cancelar', style: TextStyle(color: Color(0xFF007AFF))),
+                            child: const Text(
+                              'Cancelar',
+                              style: TextStyle(color: Color(0xFF007AFF)),
+                            ),
                             onPressed: () => Navigator.pop(context),
                           ),
-                          const Text('Repeticiones', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                          const Text(
+                            'Repeticiones',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
                           CupertinoButton(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: const Text('Listo', style: TextStyle(color: Color(0xFF007AFF), fontWeight: FontWeight.w600)),
+                            child: const Text(
+                              'Listo',
+                              style: TextStyle(
+                                color: Color(0xFF007AFF),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             onPressed: () => Navigator.pop(context),
                           ),
                         ],
                       ),
                     ),
                     const Divider(height: 1, color: Color(0xFFC6C6C8)),
-                    
+
                     Expanded(
                       child: ListView(
                         children: [
@@ -253,7 +275,9 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
-                              children: _dayOptions.asMap().entries.map((entry) {
+                              children: _dayOptions.asMap().entries.map((
+                                entry,
+                              ) {
                                 final index = entry.key;
                                 final day = entry.value;
                                 final isSelected = _selectedDays.contains(day);
@@ -272,18 +296,36 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0,
+                                          vertical: 14.0,
+                                        ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(day, style: const TextStyle(fontSize: 17, color: Colors.black)),
+                                            Text(
+                                              day,
+                                              style: const TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.black,
+                                              ),
+                                            ),
                                             if (isSelected)
-                                              const Icon(CupertinoIcons.check_mark, color: Color(0xFF007AFF), size: 20),
+                                              const Icon(
+                                                CupertinoIcons.check_mark,
+                                                color: Color(0xFF007AFF),
+                                                size: 20,
+                                              ),
                                           ],
                                         ),
                                       ),
                                       if (index < _dayOptions.length - 1)
-                                        const Divider(height: 1, indent: 16, color: Color(0xFFE5E5EA)),
+                                        const Divider(
+                                          height: 1,
+                                          indent: 16,
+                                          color: Color(0xFFE5E5EA),
+                                        ),
                                     ],
                                   ),
                                 );
@@ -315,7 +357,7 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
             color: Colors.black.withOpacity(0.04),
             blurRadius: 15,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -330,10 +372,7 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          AppleTopLabelField(
-            controller: _nameController,
-            label: 'Nombre',
-          ),
+          AppleTopLabelField(controller: _nameController, label: 'Nombre'),
           const SizedBox(height: 24),
           AppleDateTimePills(
             label: 'Fecha y Hora',
@@ -364,7 +403,7 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
             color: Colors.black.withOpacity(0.04),
             blurRadius: 15,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -404,7 +443,10 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16.0,
+              ),
               child: AppleMainHeader(
                 currentScreen: _isEditing ? 'edit_alarm' : 'create_alarm',
                 title: _isEditing ? 'Editar alarma' : 'Crear alarma',
@@ -427,8 +469,9 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                   final isWide = constraints.maxWidth > 850;
                   return SingleChildScrollView(
                     child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraints.maxHeight),
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
                       child: IntrinsicHeight(
                         child: Column(
                           children: [
@@ -473,7 +516,9 @@ class _CreateAlarmScreenState extends State<CreateAlarmScreen> {
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: AppleButton(
-                                  text: _isEditing ? 'Guardar Cambios' : 'Crear Alarma',
+                                  text: _isEditing
+                                      ? 'Guardar Cambios'
+                                      : 'Crear Alarma',
                                   onPressed: _createAlarm,
                                   isFullWidth: false,
                                 ),

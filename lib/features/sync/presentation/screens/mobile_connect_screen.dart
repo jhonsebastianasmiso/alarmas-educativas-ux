@@ -16,7 +16,6 @@ class _MobileConnectScreenState extends State<MobileConnectScreen> {
   final _platformController = TextEditingController();
   final _emailController = TextEditingController();
   bool _acceptedTerms = false;
-  String? _error;
 
   @override
   void dispose() {
@@ -27,18 +26,6 @@ class _MobileConnectScreenState extends State<MobileConnectScreen> {
 
   void _startSync() {
     FocusScope.of(context).unfocus();
-    final platform = _platformController.text.trim();
-    final email = _emailController.text.trim();
-    String? error;
-    if (platform.isEmpty) {
-      error = 'Ingresa la plataforma que deseas conectar.';
-    } else if (!RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(email)) {
-      error = 'Ingresa un correo asociado válido.';
-    } else if (!_acceptedTerms) {
-      error = 'Acepta los términos y condiciones para continuar.';
-    }
-    setState(() => _error = error);
-    if (error != null) return;
     Navigator.push<void>(
       context,
       MaterialPageRoute(builder: (_) => const FoundInformationScreen()),
@@ -110,17 +97,6 @@ class _MobileConnectScreenState extends State<MobileConnectScreen> {
                       checkboxShape: const CircleBorder(),
                       dense: true,
                     ),
-                    if (_error != null)
-                      Semantics(
-                        liveRegion: true,
-                        child: Text(
-                          _error!,
-                          style: const TextStyle(
-                            color: Color(0xFFB3261E),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
                     const SizedBox(height: 44),
                     Center(
                       child: AppleButton(
