@@ -19,13 +19,8 @@ class _FoundInformationScreenState extends State<FoundInformationScreen> {
     'Arquitectura para Big Data',
   ];
   final Set<int> _selected = {0, 1, 2};
-  String? _error;
 
   void _createAlarms() {
-    if (_selected.isEmpty) {
-      setState(() => _error = 'Selecciona al menos un curso.');
-      return;
-    }
     const alarmCounts = [17, 18, 15, 12];
     const activityCounts = [10, 10, 10, 8];
     Navigator.push<void>(
@@ -114,17 +109,8 @@ class _FoundInformationScreenState extends State<FoundInformationScreen> {
                         } else {
                           _selected.remove(index);
                         }
-                        _error = null;
                       }),
                       controlAffinity: ListTileControlAffinity.leading,
-                    ),
-                  if (_error != null)
-                    Semantics(
-                      liveRegion: true,
-                      child: Text(
-                        _error!,
-                        style: const TextStyle(color: Color(0xFFB3261E)),
-                      ),
                     ),
                   const SizedBox(height: 56),
                   Center(
