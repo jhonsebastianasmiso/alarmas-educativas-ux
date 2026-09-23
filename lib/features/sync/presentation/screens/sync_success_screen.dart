@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../../home/presentation/screens/mobile_home_screen.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
 
@@ -97,7 +97,13 @@ class SyncSuccessScreen extends StatelessWidget {
                       text: 'Entendido',
                       height: 46,
                       isFullWidth: false,
-                      onPressed: () => Navigator.maybePop(context),
+                      onPressed: () => Navigator.pushAndRemoveUntil<void>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const MobileHomeScreen(),
+                        ),
+                        (route) => false,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const Text(

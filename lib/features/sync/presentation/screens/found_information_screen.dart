@@ -1,3 +1,4 @@
+import 'sync_success_screen.dart';
 import '../../../../shared/widgets/layouts/mobile_flow_header.dart';
 import 'package:flutter/material.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
@@ -25,22 +26,23 @@ class _FoundInformationScreenState extends State<FoundInformationScreen> {
       setState(() => _error = 'Selecciona al menos un curso.');
       return;
     }
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Cursos seleccionados'),
-        content: SingleChildScrollView(
-          child: Text(
-            '${[for (var i = 0; i < _courses.length; i++)
-              if (_selected.contains(i)) _courses[i]].join('\n\n')}\n\nEstos cursos son de ejemplo. La creación de alarmas desde una plataforma aún no está disponible.',
+    // Simulated per-course totals; the initial three selections match the mockup.
+    const alarmCounts = [17, 18, 15, 12];
+    const activityCounts = [10, 10, 10, 8];
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SyncSuccessScreen(
+          alarmCount: _selected.fold<int>(
+            0,
+            (total, index) => total + alarmCounts[index],
+          ),
+          courseCount: _selected.length,
+          activityCount: _selected.fold<int>(
+            0,
+            (total, index) => total + activityCounts[index],
           ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Entendido'),
-          ),
-        ],
       ),
     );
   }
