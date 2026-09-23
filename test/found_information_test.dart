@@ -31,24 +31,15 @@ void main() {
       await tester.ensureVisible(find.text('Crear Alarmas'));
       await tester.tap(find.text('Crear Alarmas'));
       await tester.pumpAndSettle();
-      final content = tester
-          .widget<Text>(
-            find.descendant(
-              of: find.byType(AlertDialog),
-              matching: find.textContaining('Estos cursos son de ejemplo'),
-            ),
-          )
-          .data!;
-      expect(content, contains('Arquitectura para Big Data'));
-      expect(content, isNot(contains('UX mejoramiento')));
+      expect(find.text('Sincronizado'), findsOneWidget);
+      expect(find.text('12 alarmas'), findsOneWidget);
+      expect(find.text('1 asignatura con'), findsOneWidget);
+      expect(find.text('8 Actividades'), findsOneWidget);
+      await tester.ensureVisible(find.text('Entendido'));
       await tester.tap(find.text('Entendido'));
       await tester.pumpAndSettle();
-      expect(
-        tester
-            .widgetList<Checkbox>(find.byType(Checkbox))
-            .map((item) => item.value),
-        [false, false, false, true],
-      );
+      expect(find.text('Alarma P.'), findsOneWidget);
+      expect(find.byType(FoundInformationScreen), findsNothing);
     },
   );
 

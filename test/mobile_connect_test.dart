@@ -1,9 +1,12 @@
+import 'support/android_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:alarmas_educativas/features/home/presentation/screens/mobile_home_screen.dart';
 import 'package:alarmas_educativas/features/sync/presentation/screens/mobile_connect_screen.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(loadAndroidFont);
   for (final screenHeight in [760.0, 920.0]) {
     testWidgets('Connect header stays at the top on height $screenHeight', (
       tester,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../shared/widgets/buttons/apple_button.dart';
 import '../../../../shared/widgets/forms/apple_style_form.dart';
 import '../../../../shared/widgets/layouts/web_layout.dart';
-import '../../../../shared/widgets/layouts/apple_header.dart';
+import '../../../../shared/widgets/layouts/mobile_flow_header.dart';
 
 class MobileConnectScreen extends StatefulWidget {
   const MobileConnectScreen({super.key});
@@ -59,30 +59,15 @@ class _MobileConnectScreenState extends State<MobileConnectScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        const AppleHeader(
-                          title: 'Conectar',
-                          showBackButton: false,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            tooltip: 'Volver',
-                            padding: EdgeInsets.zero,
-                            onPressed: () => Navigator.maybePop(context),
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              size: 28,
-                              color: Color(0xFF007AFF),
-                            ),
-                          ),
-                        ),
-                      ],
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 104),
+                      child: const MobileFlowHeader(title: 'Conectar'),
                     ),
                     SizedBox(
-                      height: (constraints.maxHeight * .15).clamp(32.0, 110.0),
+                      height:
+                          ((constraints.maxHeight * .15).clamp(32.0, 110.0) -
+                                  56)
+                              .clamp(0.0, 54.0),
                     ),
                     const Text(
                       'Sincroniza tus actividades y crea alarmas para no faltar a ninguna entrega',
